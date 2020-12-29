@@ -1,0 +1,18 @@
+# Config file for the Beiwe data collection project
+
+default:
+  # Belowe, we just define the location of data (raw and processed)
+  data_folder: './data_raw'                 # Raw data location
+  study_folders: ['study_a', 'study_b']    # Studies to process
+  strip_folder: './data_stripped'           # Where to save csv after stripping
+  save_folder: './data_working'             # Where to save summary files
+  
+  ## Define the data folders we can merge into one file
+  ## This is a list of the sensor types that we intend to use for our analysis
+  ## All other types will be ignored.
+  data_to_merge: ["accelerometer", "gps", "bluetooth" , "power_state", 
+                  "wifi", 'gyro', 'magnetometer', 'devicemotion', 
+                  'reachability', 'proximity']
+  
+  # Parallel processing
+  cores: null               # Number of cores (null = half available cores)

@@ -1,0 +1,317 @@
+---
+title: "Documentation for the Beiwe Missing Data project"
+author: "Mathew Kiang"
+date: "10/18/2020"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE, message=FALSE, error=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(DT)
+library(here)
+
+user_studies <-
+    structure(
+        list(
+            study_dir = c(
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a",
+                "study_a"
+            ),
+            beiwe_user_id = c(
+                "user_1",
+                "user_2",
+                "user_3",
+                "user_4",
+                "user_5",
+                "user_6",
+                "user_7",
+                "user_8",
+                "user_9",
+                "user_10"
+            ),
+            study_name = c(
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020",
+                "study_a_november_2020"
+            ),
+            accel_on = c(10L,
+                         10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L, 10L),
+            accel_off = c(
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L
+            ),
+            bluetooth_on = c(60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L,
+                             60L, 60L),
+            bluetooth_total = c(300L, 300L, 300L, 300L, 300L,
+                                300L, 300L, 300L, 300L, 300L),
+            gps_on = c(60L, 60L, 60L,
+                       60L, 60L, 60L, 60L, 60L, 60L, 60L),
+            gps_off = c(
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L,
+                1200L
+            ),
+            gyro_on = c(60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L,
+                        60L),
+            gyro_off = c(600L, 600L, 600L, 600L, 600L, 600L, 600L,
+                         600L, 600L, 600L),
+            magnet_on = c(60L, 60L, 60L, 60L, 60L,
+                          60L, 60L, 60L, 60L, 60L),
+            magnet_off = c(600L, 600L, 600L,
+                           600L, 600L, 600L, 600L, 600L, 600L, 600L),
+            devicemotion_on = c(60L,
+                                60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L, 60L),
+            devicemotion_off = c(600L,
+                                 600L, 600L, 600L, 600L, 600L, 600L, 600L, 600L, 600L),
+            wifi_freq = c(300L,
+                          300L, 300L, 300L, 300L, 300L, 300L, 300L, 300L, 300L)
+        ),
+        class = c("tbl_df",
+                  "tbl", "data.frame"),
+        row.names = c(NA, -10L)
+    )
+
+user_demog <- structure(
+        list(
+            beiwe_user_id = c(
+                "user_1",
+                "user_2",
+                "user_3",
+                "user_4",
+                "user_5",
+                "user_6",
+                "user_7",
+                "user_8",
+                "user_9",
+                "user_10"
+            ),
+            multiple_ids = c(1, 1, 1, 1, 1, 1, 0, 1, 0, 1),
+            female = c(0, 0, 0, 0, 1, 0, 0, 1, 0, 0),
+            age = c(52, 35, 25, 28, 39, 25, 43, 39, 24, 25),
+            race = c(
+                "white",
+                "white",
+                "asian",
+                "white",
+                "white",
+                "white",
+                "black",
+                "white",
+                "white",
+                "white"
+            ),
+            education = c(
+                "bachelors",
+                "bachelors",
+                "associates",
+                "associates",
+                "masters",
+                "associates",
+                "hs",
+                "masters",
+                "associates",
+                "associates"
+            )
+        ),
+        class = c("spec_tbl_df",
+                  "tbl_df", "tbl", "data.frame"),
+        row.names = c(NA, -10L),
+        spec = structure(list(
+            cols = list(
+                beiwe_user_id = structure(list(), class = c("collector_character",
+                                                            "collector")),
+                multiple_ids = structure(list(), class = c("collector_double",
+                                                           "collector")),
+                female = structure(list(), class = c("collector_double",
+                                                     "collector")),
+                age = structure(list(), class = c("collector_double",
+                                                  "collector")),
+                race = structure(list(), class = c("collector_character",
+                                                   "collector")),
+                education = structure(list(), class = c("collector_character",
+                                                        "collector"))
+            ),
+            default = structure(list(), class = c("collector_guess",
+                                                  "collector")),
+            skip = 1
+        ), class = "col_spec")
+    )
+
+drop_users <- tibble(beiwe_user_id = paste0("user_", sample(100:2000, 3)))
+```
+
+## Introduction
+
+Here, we describe the function of each code file along with the expected structure of folders and data files. As noted in the root `README` file, the project (i.e., folder) structure is:
+
+- `code`: Contains code files to be run in sequential order. See documentation for details. 
+- `data_raw`  (not on Github): Contain raw data collected using the Beiwe Research Platform.
+- `data_stripped` (not on Github): Contain summarized data collected using the Beiwe Research Platform.
+- `data_working` (not on Github): Contain working data used for plots and analysis.
+- `model_objects` (not on Github): Contain the RStan/brms model objects after fitting.
+- `output`: Contains all plots, tables, and relevant supplementary information.
+- `rmds`: Contains the source (i.e., rmarkdown) files for supplementary information.
+
+Below, we describe the format of the raw data then walk through each code file including expected input and output.
+
+## Raw data structure and format
+
+All data stored in `./data_raw` are directly generated from the Beiwe Research Platform. As [we described elsewhere](https://github.com/onnela-lab/beiwe_data_sample), the data processed and stored such that each file is saved under a study directory, user directory, sensor directory, and hourly `csv` file.
+
+For example, the file tree of raw data files may look like so for `user_1` in `study_a`:
+```
+data_raw
+├── study_a
+│   └── user_1
+│       ├── accelerometer
+│       │   ├── 2020-01-26\ 22_00_00.csv
+│       │   ├── 2020-01-26\ 23_00_00.csv
+│       │   ├── 2020-01-27\ 00_00_00.csv
+│       │   ├── < ... >
+│       │   └── 2020-02-04\ 14_00_00.csv
+│       ├── app_log
+│       │   ├── 2020-01-26\ 22_00_00.csv
+│       │   ├── 2020-01-26\ 23_00_00.csv
+│       │   ├── 2020-01-27\ 00_00_00.csv
+│       │   ├── < ... >
+│       │   └── 2020-02-04\ 14_00_00.csv
+│       ├── bluetooth
+│       │   ├── 2020-01-26\ 22_00_00.csv
+│       │   ├── 2020-01-26\ 23_00_00.csv
+│       │   ├── 2020-01-27\ 00_00_00.csv
+│       │   ├── < ... >
+│       │   └── 2020-02-04\ 14_00_00.csv
+│       ├── calls
+│       │   └── 2020-02-02\ 15_00_00.csv
+│       ├── gps
+│       │   ├── 2020-01-26\ 22_00_00.csv
+│       │   ├── 2020-01-26\ 23_00_00.csv
+│       │   ├── 2020-01-27\ 00_00_00.csv
+│       │   ├── < ... >
+│       │   └── 2020-02-04\ 14_00_00.csv
+│       ├── identifiers
+│       │   └── 2020-01-26\ 22_00_00.csv
+│       ├── power_state
+│       │   ├── 2020-01-26\ 22_00_00.csv
+│       │   ├── 2020-01-26\ 23_00_00.csv
+│       │   ├── 2020-01-27\ 00_00_00.csv
+│       │   ├── < ... >
+│       │   └── 2020-02-04\ 14_00_00.csv
+│       ├── survey_answers
+│       │   └── 5613cfd497013e703b725e62
+│       │       └── 2020-01-26\ 19_44_57.csv
+│       ├── survey_timings
+│       │   └── 5613cfd497013e703b725e62
+│       │       └── 2020-01-26\ 19_00_00.csv
+│       └── wifi
+│           ├── 2020-01-26\ 22_00_00.csv
+│           ├── 2020-01-26\ 23_00_00.csv
+│           ├── 2020-01-27\ 00_00_00.csv
+│           ├── < ... >
+│           └── 2020-02-04\ 14_00_00.csv
+< ... >
+```
+
+This structure would follow for every user and study. The format for each sensor/survey may differ but all of them have a column called `UTC time`, which is the only column imported for these analyses. Further, for these analyses, we only look at accelerometer and GPS, which are the two sensors that are most consistent across Android and iOS devices. 
+
+## Code files
+
+### `01_create_user_df.R`
+
+This aggregates user information across a variety of sources. The `user_studies` object imports a simple table that contains study and user information as well as the study data collection parameters. Here is a simulated example:
+
+```{r}
+kable(user_studies)
+```
+
+Time-invariant, study-specific covariates should be added to this file, which will later be merged with the user-day information.
+
+The output of this file is the `user_demog` object, which contains user demographics. Here is a simulated example:
+```{r}
+kable(user_demog)
+```
+
+Time-invariant, user-specific covariates should be added to this file, which will later be merged with user-day information. 
+
+Lastly, the `drop_users` object simply contains a list of user IDs that were used for testing purposes and not actual participants:
+
+```{r}
+drop_users
+```
+
+The code will cycle through specific `identifier` files and merge them with the data sets above, resulting in a dataframe that contains as many rows as there are unique identifiers/users. If a user has multiple identifiers, we leave it up to the researcher to merge them appropriately. 
+
+### `02_summarize_data_files.R`
+
+This code will cycle through the specified sensor files and for each `csv` described above and generate two files. The first is a user-sensor file containing a summary of first and last observation, total hours of observation, daily observations, etc. Here is a simulated example:
+
+```
+# A tibble: 1 x 10
+  study_name user_id data_type     first_obs           last_obs            hours_of_obs mean_daily_obs max_daily_obs min_daily_obs total_obs
+  <chr>      <chr>   <chr>         <dttm>              <dttm>                     <dbl>          <dbl>         <dbl>         <dbl>     <int>
+1 study_a    user_1  accelerometer 2018-03-23 17:27:13 2018-10-17 23:06:18        4993.        237816.        426620          4240  49703587
+```
+
+The second file is a user-sensor file containing a summary of all *groupings*. That is, for every data grouping, when did it start and end, how many observations, etc. Here is a simulated example:
+
+```
+# A tibble: 502,687 x 13
+    year month   day  hour grouping t_min               t_max               t_delta dur_sec n_obs study_name data_type     user_id
+   <dbl> <dbl> <int> <int>    <dbl> <dttm>              <dttm>              <drtn>  <drtn>  <int> <chr>      <chr>         <chr>  
+ 1  2018     3    23    19        1 2018-03-23 19:27:13 2018-03-23 19:27:23 10 secs 10 secs    99 study_a    accelerometer user_1 
+ 2  2018     3    23    19        2 2018-03-23 19:27:34 2018-03-23 19:27:43  9 secs  9 secs    99 study_a    accelerometer user_1 
+ 3  2018     3    23    19        3 2018-03-23 19:27:54 2018-03-23 19:28:03  9 secs  9 secs    99 study_a    accelerometer user_1 
+ 4  2018     3    23    19        4 2018-03-23 19:28:14 2018-03-23 19:28:23  9 secs  9 secs    99 study_a    accelerometer user_1 
+ 5  2018     3    23    19        5 2018-03-23 19:28:34 2018-03-23 19:28:43  9 secs  9 secs    98 study_a    accelerometer user_1 
+ 6  2018     3    23    19        6 2018-03-23 19:28:54 2018-03-23 19:29:03  9 secs  9 secs    98 study_a    accelerometer user_1 
+ 7  2018     3    23    19        7 2018-03-23 19:29:14 2018-03-23 19:29:24 10 secs 10 secs    99 study_a    accelerometer user_1 
+ 8  2018     3    23    19        8 2018-03-23 19:29:34 2018-03-23 19:29:44 10 secs 10 secs    99 study_a    accelerometer user_1 
+ 9  2018     3    23    19        9 2018-03-23 19:29:54 2018-03-23 19:30:04 10 secs 10 secs    99 study_a    accelerometer user_1 
+10  2018     3    23    19       10 2018-03-23 19:30:14 2018-03-23 19:30:24 10 secs 10 secs   100 study_a    accelerometer user_1 
+```
+
+### `03_create_accel_working_df.R`, `04_create_gps_working_df.R`, and `05_create_analytical_df.R`
+
+Using the output from the first two code files, these two files gather up the user-sensor files and combine it with the time-invariant study and user files to get sensor-specific working data sets. Finally, the analytic data are created which includes final age and education categories as well as new study names. 
+
+### Remaining files
+
+The remaining files fit the odels, create the tables, and generate the plots. These files are self-explanatory within the code since they all rely on the data generated from the above files. 
