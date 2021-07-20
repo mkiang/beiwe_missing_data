@@ -13,9 +13,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Introduction
 
-For our paper, *Sociodemographic  Characteristics of Missing Data in Digital Phenotyping*, in addition to our main model presented in the manuscript, we ran five additional models for both GPS and accelerometer non-collection as described in the Supplementary Information. Below, we first provide model comparison metrics (e.g., LOO and WAIC). We then provide the exact output of each model as well as the null model (i.e., no hierarchy and no sociodemographic covariates) along with model fit metrics. Session information is presented at the end. 
+For our *Scientific Reports* paper, *Sociodemographic  Characteristics of Missing Data in Digital Phenotyping*, in addition to our main model presented in the manuscript, we ran five additional models for both GPS and accelerator non-collection as described in the Supplementary Information. Below, we first provide model comparison metrics (e.g., LOO and WAIC). We then provide the exact output of each model as well as the null model (i.e., no hierarchy and no sociodemographic covariates) along with model fit metrics. Session information is presented at the end. 
 
-For details, please see the paper and it's Supplementary Information. We note that when presenting random effect estimates, we remove the row names out of an abundance of caution. Though user IDs are randomly assigned and study names are generic, combined with other (i.e., external) data, it may be possible to derive more information about participants and leaad to re-identification. The removal of random identifiers does not affect our results. 
+For details, please see the paper and it's Supplementary Information. We note that when presenting random effect estimates, we remove the row names out of an abundance of caution. Though user IDs are randomly assigned and study names are generic, combined with other (i.e., external) data, it may be possible to derive more information about participants and lead to re-identification. The removal of random identifiers does not affect our results. 
+
+Lastly, we show results for an alternative model, the Bayesian hierarchical categorical regression, described in the Supplemental Information. 
 
 ## Set up
 ```{r, message=FALSE, warning=FALSE, error=FALSE}
@@ -38,6 +40,9 @@ gps_m1u_dem <- readRDS(here("model_objects", "gps_m1u_dem.RDS"))
 gps_m1u_dem_study <- readRDS(here("model_objects", "gps_m1u_dem_study.RDS"))
 gps_m1s_dem <- readRDS(here("model_objects", "gps_m1s_dem.RDS"))
 gps_m2_dem <- readRDS(here("model_objects", "gps_m2_dem.RDS"))
+
+sens_m_accel <- readRDS(here("model_objects", "sens_m2_dem_accel.RDS"))
+sens_m_gps <- readRDS(here("model_objects", "sens_m2_dem_gps.RDS"))
 ```
 
 ## Model comparisons
@@ -49,7 +54,7 @@ loo_compare(
     accel_m1u_dem,
     accel_m1u_dem_study,
     accel_m1s_dem,
-    accel_m2_dem,
+    accel_m2_dem, 
     criterion = "waic"
 )
 ```
@@ -74,7 +79,6 @@ loo_compare(
     gps_m1u_dem,
     gps_m1u_dem_study,
     gps_m1s_dem,
-    gps_m2_dem,
     criterion = "waic"
 )
 ```
@@ -93,7 +97,7 @@ loo_compare(
 
 ## Model output
 
-### Model output for accelerometer Model 1 (primary model)
+### Model output for accelerometer Model 1 (observations nested in users)
 #### Output
 ```{r, warning=FALSE, error=FALSE, message=FALSE}
 accel_m1u_dem
@@ -119,7 +123,7 @@ waic(accel_m1u_dem)$estimates
 loo(accel_m1u_dem)$estimates
 ```
 
-### Model output for GPS Model 1 (primary model)
+### Model output for GPS Model 1 (observations nested in users)
 #### Output
 ```{r, warning=FALSE, error=FALSE, message=FALSE}
 gps_m1u_dem
@@ -403,6 +407,62 @@ waic(gps_m1u_dem_study)$estimates
 #### LOO
 ```{r, warning=FALSE, error=FALSE, message=FALSE}
 loo(gps_m1u_dem_study)$estimates
+```
+
+### Model output for accelerometer categorical model (sensitivity)
+#### Output
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+sens_m_accel
+```
+
+#### Random effects
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+x <- ranef(sens_m_accel)
+```
+
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+rownames(x[[1]]) <- NULL
+rownames(x[[2]]) <- NULL
+print(x)
+```
+
+
+#### WAIC
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+waic(sens_m_accel)$estimates
+```
+
+#### LOO
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+loo(sens_m_accel)$estimates
+```
+
+### Model output for GPS categorical model (sensitivity)
+#### Output
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+sens_m_gps
+```
+
+#### Random effects
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+x <- ranef(sens_m_gps)
+```
+
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+rownames(x[[1]]) <- NULL
+rownames(x[[2]]) <- NULL
+print(x)
+```
+
+
+#### WAIC
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+waic(sens_m_gps)$estimates
+```
+
+#### LOO
+```{r, warning=FALSE, error=FALSE, message=FALSE}
+loo(sens_m_gps)$estimates
 ```
 
 ## Session information
