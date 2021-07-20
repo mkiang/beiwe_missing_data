@@ -14,21 +14,25 @@ knitr::opts_chunk$set(
 
 <p align = "center">
 ```{r echo=FALSE, out.width = "700px", fig.align='center'}
-knitr::include_graphics("./output/fig2_dist_daily_non_collection.jpg")
+knitr::include_graphics("./output/fig2_dist_daily_non_collection_prop.jpg")
 ```
 </p>
 
 ## Introduction 
 
-Analytic [code](https://github.com/mkiang/beiwe_missing_data/tree/master/code), [model results](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_model_output_cleaned.html), and [documentation](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_documentation_code_walkthrough.html) for our preprint, [*Sociodemographic Characteristics of Missing Data in Digital Phenotyping*](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1). The full citation is:
+Analytic [code](https://github.com/mkiang/beiwe_missing_data/tree/master/code), [model results](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_model_output_cleaned.html), and [documentation](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_documentation_code_walkthrough.html) for our *Scientific Reports* paper, *Sociodemographic Characteristics of Missing Data in Digital Phenotyping*. The full citation is:
 
-> Kiang MV, Chen JT, Krieger N, Buckee CO, Alexander MJ, Baker JT, Buckner RL, Coombs III G, Rich-Edwards JW, Carlson KW, and Onnela JP. Sociodemographic characteristics of missing data in digital phenotyping. *medRxiv* (January 2020). doi: [10.1101/2020.12.29.20249002v1](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1)
+> Kiang MV, Chen JT, Krieger N, Buckee CO, Alexander MJ, Baker JT, Buckner RL, Coombs III G, Rich-Edwards JW, Carlson KW, and Onnela JP. Sociodemographic characteristics of missing data in digital phenotyping. *Scientific Reports* (July 2021). doi: 10.1038/s41598-021-93687-7
 
 ### A note about reproducibility
 
 As we note in our Supplementary Information, the data used in these analyses were *meta*data and contained only timestamps (e.g., the date and time of a GPS ping but not the coordinates); however, the timestamps of participants can be considered personally identifiable information. Therefore, to minimize the potential for participant harm and re-identification, the data are not shared publicly. Data available upon request, contingent upon appropriate IRB approvals or exemptions from participating institutions. While not the raw data, these data will provide sufficient information to reproduce our results (e.g., using shifted and/or adding noise to timestamps, re-randomized user identifiers). 
 
 In addition, we provide example replication code, along with documentation, in this online repository. The code and documentation are near exact copies of the code used in this project with only minor differences. Specifically, for this paper, we use internal study project names which may include a year and/or month. Out of an abundance of caution, we remove any references to these study names. However, the code is otherwise the same. See the documentation for more information.
+
+### Preprint
+
+This paper originally appeared as a [preprint on *medRxiv*](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1) (doi: [10.1101/2020.12.29.20249002v1](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1)). The code affiliated with this preprint can be found [at this commit](https://github.com/mkiang/beiwe_missing_data/tree/faba924f8ee75abd895dcc69c0f5c5c62b4eda12).
 
 ## Structure
 
