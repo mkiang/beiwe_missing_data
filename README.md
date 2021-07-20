@@ -4,7 +4,7 @@
 ## Sociodemographic characteristics of missing data in digital phenotyping
 
 <p align="center">
-<img src="./output/fig2_dist_daily_non_collection.jpg" width="700px" style="display: block; margin: auto;" />
+<img src="./output/fig2_dist_daily_non_collection_prop.jpg" width="700px" style="display: block; margin: auto;" />
 </p>
 
 ## Introduction
@@ -15,16 +15,14 @@ Analytic
 results](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_model_output_cleaned.html),
 and
 [documentation](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_documentation_code_walkthrough.html)
-for our preprint, [*Sociodemographic Characteristics of Missing Data in
-Digital
-Phenotyping*](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1).
-The full citation is:
+for our *Scientific Reports* paper, *Sociodemographic Characteristics of
+Missing Data in Digital Phenotyping*. The full citation is:
 
 > Kiang MV, Chen JT, Krieger N, Buckee CO, Alexander MJ, Baker JT,
 > Buckner RL, Coombs III G, Rich-Edwards JW, Carlson KW, and Onnela JP.
 > Sociodemographic characteristics of missing data in digital
-> phenotyping. *medRxiv* (January 2020). doi:
-> [10.1101/2020.12.29.20249002v1](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1)
+> phenotyping. *Scientific Reports* (July 2021). doi:
+> 10.1038/s41598-021-93687-7
 
 ### A note about reproducibility
 
@@ -47,6 +45,15 @@ differences. Specifically, for this paper, we use internal study project
 names which may include a year and/or month. Out of an abundance of
 caution, we remove any references to these study names. However, the
 code is otherwise the same. See the documentation for more information.
+
+### Preprint
+
+This paper originally appeared as a [preprint on
+*medRxiv*]((https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1))
+(doi:
+[10.1101/2020.12.29.20249002v1](https://www.medrxiv.org/content/10.1101/2020.12.29.20249002v1)).
+The code affiliated with this preprint can be found [at this
+commit](https://github.com/mkiang/beiwe_missing_data/tree/faba924f8ee75abd895dcc69c0f5c5c62b4eda12).
 
 ## Structure
 
