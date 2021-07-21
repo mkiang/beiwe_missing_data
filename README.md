@@ -15,14 +15,16 @@ Analytic
 results](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_model_output_cleaned.html),
 and
 [documentation](http://htmlpreview.github.io/?https://github.com/mkiang/beiwe_missing_data/blob/master/rmd/supp_documentation_code_walkthrough.html)
-for our *Scientific Reports* paper, *Sociodemographic Characteristics of
-Missing Data in Digital Phenotyping*. The full citation is:
+for our *Scientific Reports* paper, [*Sociodemographic Characteristics
+of Missing Data in Digital
+Phenotyping*](https://doi.org/10.1038/s41598-021-94516-7). The full
+citation is:
 
 > Kiang MV, Chen JT, Krieger N, Buckee CO, Alexander MJ, Baker JT,
 > Buckner RL, Coombs III G, Rich-Edwards JW, Carlson KW, and Onnela JP.
 > Sociodemographic characteristics of missing data in digital
 > phenotyping. *Scientific Reports* (July 2021). doi:
-> 10.1038/s41598-021-93687-7
+> [10.1038/s41598-021-93687-7](https://doi.org/10.1038/s41598-021-94516-7)
 
 ### A note about reproducibility
 
